@@ -70,16 +70,13 @@
 "-------------------------------------------------------------------------------
 
 
-
-" status bar colors
+"--------------------------------------------------------------------------------------------------------------------
+"   Setup status bar, based on status bar from: https://gist.github.com/meskarune/57b613907ebd1df67eb7bdb83c6e6641
+"--------------------------------------------------------------------------------------------------------------------
 au InsertEnter * hi statusline guifg=black guibg=#d7afff ctermfg=black ctermbg=magenta
 au InsertLeave * hi statusline guifg=black guibg=#8fbfdc ctermfg=black ctermbg=cyan
 hi statusline guifg=black guibg=#8fbfdc ctermfg=black ctermbg=cyan
 
-" Status line
-" default: set statusline=%f\ %h%w%m%r\ %=%(%l,%c%V\ %=\ %P%)
-
-" Status Line Custom
 let g:currentmode={
         \ 'n'  : 'Normal',
         \ 'no' : 'Normal·Operator Pending',
@@ -122,3 +119,5 @@ set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
 hi User1 ctermfg=000 ctermbg=007 guibg=#4e4e4e guifg=#adadad " white behind path and modified flag
 hi User2 ctermfg=000 ctermbg=007 guibg=#708090 guifg=#708090 " central red
 hi User3 ctermfg=008 ctermbg=007 guibg=#708090 guifg=#708090 " red behind splitters
+"--------------------------------------------------------------------------------------------------------------------
+"--------------------------------------------------------------------------------------------------------------------
