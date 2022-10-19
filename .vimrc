@@ -72,8 +72,8 @@
 "-------------------------------------------------------------------------------
 "   Key-mapping
 "-------------------------------------------------------------------------------
-    inoremap jk <esc>   " Remapping ESC to jk in insert mode
-    vnoremap jk <esc>   " Remapping ESC to jk in visual mode
+    inoremap jk <esc><left><left>   " Remapping ESC to jk in insert mode
+    vnoremap jk <esc><left><left>   " Remapping ESC to jk in visual mode
 
     cnoremap jk <C-C>   " Remapping Ctrl-C to jk in command mode
 
