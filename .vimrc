@@ -66,6 +66,10 @@
     set hlsearch
 
     set incsearch
+
+    set ignorecase  " Be case insensitive
+
+    set smartcase   " Be case sensitive if caps used
 "-------------------------------------------------------------------------------
 "-------------------------------------------------------------------------------
 
