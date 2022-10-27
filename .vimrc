@@ -103,6 +103,8 @@ set shellcmdflag=-command
 
     cnoremap jk <C-C>   " Remapping Ctrl-C to jk in command mode
 
+    nnoremap <tab> za   " Remapping toggle fold to tab key
+
     set timeoutlen=250  " Setting timeout delay
 "-------------------------------------------------------------------------------
 "-------------------------------------------------------------------------------
