@@ -117,6 +117,8 @@
     nnoremap tk :tabnext<CR> " Move to newxt tab
 
     nnoremap tj :tabprev<CR> " Move to previous tab
+
+    nnoremap tl :tabs<CR> " Show a list of open tabs
 "-------------------------------------------------------------------------------
 
 "--------------------------------------------------------------------------------------------------------------------
