@@ -111,6 +111,12 @@
     nnoremap <tab> za   " Remapping toggle fold to tab key
 
     set timeoutlen=250  " Setting timeout delay
+
+    nnoremap tn :tabnew<CR> " Create new empty tab
+
+    nnoremap tk :tabnext<CR> " Move to newxt tab
+
+    nnoremap tj :tabprev<CR> " Move to previous tab
 "-------------------------------------------------------------------------------
 
 "--------------------------------------------------------------------------------------------------------------------
@@ -170,6 +176,24 @@ hi User3 ctermfg=008 ctermbg=007 guibg=#708090 guifg=#708090 " red behind splitt
     augroup AutoSaveFolds
         autocmd!
         autocmd BufWinLeave * mkview
-        autocmd BufWinEnter * silent loadview
+        autocmd BufWinEnter * if CanLoadView() == 1 | silent loadview | endif
     augroup END
+"-------------------------------------------------------------------------------
+
+"-------------------------------------------------------------------------------
+"   Handle tabs
+"-------------------------------------------------------------------------------
+    set showtabline=2
+
+    function CanLoadView()
+        if @% == ""
+            " If no filename
+            return 0
+        elseif filereadable(@%) == 0
+            " If file is not readable
+            return 0
+        endif
+
+        return 1
+    endfunction
 "-------------------------------------------------------------------------------
