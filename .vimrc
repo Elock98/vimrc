@@ -175,7 +175,7 @@ hi User3 ctermfg=008 ctermbg=007 guibg=#708090 guifg=#708090 " red behind splitt
 "-------------------------------------------------------------------------------
     augroup AutoSaveFolds
         autocmd!
-        autocmd BufWinLeave * mkview
+        autocmd BufWinLeave,BufWrite * if CanLoadView() == 1 | mkview | endif
         autocmd BufWinEnter * if CanLoadView() == 1 | silent loadview | endif
     augroup END
 "-------------------------------------------------------------------------------
