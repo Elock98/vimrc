@@ -54,14 +54,11 @@
 "-------------------------------------------------------------------------------
 
 "-------------------------------------------------------------------------------
-"   Set cursor color
+"   Set cursor style
 "-------------------------------------------------------------------------------
-    highlight Cursor guifg=orange guibg=orange
-"    highlight iCursor guifg=white guibg=steelblue
-    set guicursor=n-v-c:block-Cursor
-"    set guicursor+=i:ver100-iCursor
-    set guicursor+=n-v-c:blinkon0
-"    set guicursor+=i:blinkwait10
+    let &t_SI.="\e[5 q" " Set blinking vartical bar
+    let &t_SR.="\e[4 q" " Set solid underscore
+    let &t_EI.="\e[1 q" " Set blinking block
 "-------------------------------------------------------------------------------
 
 "-------------------------------------------------------------------------------
