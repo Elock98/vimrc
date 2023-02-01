@@ -88,9 +88,9 @@
 "-------------------------------------------------------------------------------
 "   Search highlight
 "-------------------------------------------------------------------------------
-    set hlsearch
+    set hlsearch " Highlight search
 
-    set incsearch
+    set incsearch " Incremental search
 
     set ignorecase  " Be case insensitive
 
