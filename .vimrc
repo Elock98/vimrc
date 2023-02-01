@@ -6,6 +6,12 @@
         " Markdown Preview plugin
         Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
+        " NerdTree plugin
+        Plug 'preservim/nerdtree'
+
+        " Git for NerdTree
+        Plug 'Xuyuanp/nerdtree-git-plugin'
+
     call plug#end()
 "-------------------------------------------------------------------------------
 
