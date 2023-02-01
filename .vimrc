@@ -115,13 +115,6 @@
 
     set timeoutlen=250  " Setting timeout delay
 
-    nnoremap tn :tabnew<CR> " Create new empty tab
-
-    nnoremap tk :tabnext<CR> " Move to newxt tab
-
-    nnoremap tj :tabprev<CR> " Move to previous tab
-
-    nnoremap tl :tabs<CR> " Show a list of open tabs
 "-------------------------------------------------------------------------------
 
 "--------------------------------------------------------------------------------------------------------------------
@@ -215,6 +208,13 @@ hi User3 ctermfg=008 ctermbg=007 guibg=#708090 guifg=#708090 " red behind splitt
     nnoremap <leader>v :vsplit<CR> " Vertical split using <space>v
     nnoremap <leader>h :split<CR> " Horizontal split using <space>h
     nnoremap <leader>w <C-w>w " Swap to next split window using <space>w
+
+    nnoremap <leader>t :tabnew<CR> " Create new empty tab
+    nnoremap <leader>c :tabclose<CR> " Close the current tab
+    nnoremap <leader>j :tabpre<CR> " Moves to the previous tab
+    nnoremap <leader>k :tabnext<CR> " Moves to the next tab
+
+    nnoremap <leader>n :NERDTreeFocus<CR> " Open NerdTree with <space>n
 "-------------------------------------------------------------------------------
 
 "-------------------------------------------------------------------------------
