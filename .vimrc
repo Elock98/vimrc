@@ -12,7 +12,76 @@
         " Git for NerdTree
         Plug 'Xuyuanp/nerdtree-git-plugin'
 
+        " Icons for NerdTree
+        Plug 'ryanoasis/vim-devicons'
+
+        " GoYo Distraction-free Writing
+        Plug 'junegunn/goyo.vim'
+
     call plug#end()
+
+    let NERDTreeShowHidden=1 " NerdTree will show hidden files
+"-------------------------------------------------------------------------------
+
+"-------------------------------------------------------------------------------
+"   Remaps leader
+"-------------------------------------------------------------------------------
+    let mapleader = "\<Space>"
+"-------------------------------------------------------------------------------
+
+"-------------------------------------------------------------------------------
+"   Key-Mapping
+"-------------------------------------------------------------------------------
+    set timeoutlen=250  " Setting timeout delay
+
+    " Remapping ESC to jk in insert mode
+    inoremap jk <esc><left><left>
+
+    " Remapping ESC to jk in visual mode
+    vnoremap jk <esc><left><left>
+
+    " Remapping Ctrl-C to jk in command mode
+    cnoremap jk <C-C>
+
+    " Remapping toggle fold to tab key
+    nnoremap <tab> za
+
+    " Vertical split using <space>v
+    nnoremap <leader>v :vsplit<CR>
+
+    " Horizontal split using <space>h
+    nnoremap <leader>h :split<CR>
+
+    " Swap to next split window using <space>w
+    nnoremap <leader>w <C-w>w
+
+    " Create new empty tab
+    nnoremap <leader>t :tabnew<CR>
+
+    " Close the current tab
+    nnoremap <leader>c :tabclose<CR>
+
+    " Moves to the previous tab
+    nnoremap <leader>j :tabpre<CR>
+
+    " Moves to the next tab
+    nnoremap <leader>k :tabnext<CR>
+
+    " Open NerdTree with <space>n
+    nnoremap <leader>n :NERDTreeFocus<CR>
+
+    " Use <space>s to get into line substitute fast
+    nnoremap <leader>s :s//g<left><left>
+
+    " Use <space>a to get into global substitute fast
+    nnoremap <leader>a :%s//g<left><left>
+
+    " Activate markdown preview using <ctrl>m
+    nnoremap <C-m> :MarkdownPreview<CR>
+
+    " Toggle Goyo mode using <ctrl>g
+    nnoremap <C-g> :Goyo<CR>
+
 "-------------------------------------------------------------------------------
 
 "-------------------------------------------------------------------------------
@@ -28,7 +97,7 @@
 "-------------------------------------------------------------------------------
 
 "-------------------------------------------------------------------------------
-"   Allow for running powershell functions
+"   Allow for running powershell functions, remove or change shell if not using PS
 "-------------------------------------------------------------------------------
     set shell=powershell
     set shellcmdflag=-command
@@ -52,7 +121,6 @@
     autocmd BufWritePre * %s/\s\+$//e
 "-------------------------------------------------------------------------------
 
-
 "-------------------------------------------------------------------------------
 "   Set color scheme
 "-------------------------------------------------------------------------------
@@ -68,12 +136,6 @@
 "-------------------------------------------------------------------------------
 
 "-------------------------------------------------------------------------------
-"   Set syntax highlight
-"-------------------------------------------------------------------------------
-    syntax on
-"-------------------------------------------------------------------------------
-
-"-------------------------------------------------------------------------------
 "   Enable use of backspace and delete
 "-------------------------------------------------------------------------------
     set backspace=indent,eol,start
@@ -82,7 +144,15 @@
 "-------------------------------------------------------------------------------
 "   Show line numbers
 "-------------------------------------------------------------------------------
-    set number
+    set number " Static line numbers
+"    set relativenumber " Relative line numbers
+"    set number relativenumber " Hybrid mode
+"-------------------------------------------------------------------------------
+
+"-------------------------------------------------------------------------------
+"   Set syntax highlight
+"-------------------------------------------------------------------------------
+    syntax on
 "-------------------------------------------------------------------------------
 
 "-------------------------------------------------------------------------------
@@ -104,17 +174,44 @@
 "-------------------------------------------------------------------------------
 
 "-------------------------------------------------------------------------------
-"   Key-mapping
+"   Handle make and load view (folds)
 "-------------------------------------------------------------------------------
-    inoremap jk <esc><left><left>   " Remapping ESC to jk in insert mode
-    vnoremap jk <esc><left><left>   " Remapping ESC to jk in visual mode
+    augroup AutoSaveFolds
+        autocmd!
+        autocmd BufWinLeave,BufWrite * if CanLoadView() == 1 | mkview | endif
+        autocmd BufWinEnter * if CanLoadView() == 1 | silent loadview | endif
+    augroup END
+"-------------------------------------------------------------------------------
 
-    cnoremap jk <C-C>   " Remapping Ctrl-C to jk in command mode
+"-------------------------------------------------------------------------------
+"   Handle tabs
+"-------------------------------------------------------------------------------
+    set showtabline=2
 
-    nnoremap <tab> za   " Remapping toggle fold to tab key
+    function CanLoadView()
+        if @% == ""
+            " If no filename
+            return 0
+        elseif filereadable(@%) == 0
+            " If file is not readable
+            return 0
+        endif
+        " If the file can load
+        return 1
+    endfunction
+"-------------------------------------------------------------------------------
 
-    set timeoutlen=250  " Setting timeout delay
+"-------------------------------------------------------------------------------
+"   Set split direction
+"-------------------------------------------------------------------------------
+    set splitbelow " Horizontal split
+    set splitright " Vertical split
+"-------------------------------------------------------------------------------
 
+"-------------------------------------------------------------------------------
+"   Silence bells
+"-------------------------------------------------------------------------------
+    set belloff=all
 "-------------------------------------------------------------------------------
 
 "--------------------------------------------------------------------------------------------------------------------
@@ -163,69 +260,10 @@ set statusline+=%3*│                                     " Separator
 set statusline+=%1*\ ln:\ %02l/%L\ (%3p%%)\              " Line number / total lines, percentage of document
 set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
 
-hi User1 ctermfg=000 ctermbg=007 guibg=#4e4e4e guifg=#adadad " white behind path and modified flag
-hi User2 ctermfg=000 ctermbg=007 guibg=#708090 guifg=#708090 " central red
-hi User3 ctermfg=008 ctermbg=007 guibg=#708090 guifg=#708090 " red behind splitters
+" white behind path and modified flag
+hi User1 ctermfg=000 ctermbg=007 guibg=#4e4e4e guifg=#adadad
+" central red
+hi User2 ctermfg=000 ctermbg=007 guibg=#708090 guifg=#708090
+" red behind splitters
+hi User3 ctermfg=008 ctermbg=007 guibg=#708090 guifg=#708090
 "--------------------------------------------------------------------------------------------------------------------
-
-"-------------------------------------------------------------------------------
-"   Handle make and load view (folds)
-"-------------------------------------------------------------------------------
-    augroup AutoSaveFolds
-        autocmd!
-        autocmd BufWinLeave,BufWrite * if CanLoadView() == 1 | mkview | endif
-        autocmd BufWinEnter * if CanLoadView() == 1 | silent loadview | endif
-    augroup END
-"-------------------------------------------------------------------------------
-
-"-------------------------------------------------------------------------------
-"   Handle tabs
-"-------------------------------------------------------------------------------
-    set showtabline=2
-
-    function CanLoadView()
-        if @% == ""
-            " If no filename
-            return 0
-        elseif filereadable(@%) == 0
-            " If file is not readable
-            return 0
-        endif
-
-        return 1
-    endfunction
-"-------------------------------------------------------------------------------
-
-"-------------------------------------------------------------------------------
-"   Remaps using leader
-"-------------------------------------------------------------------------------
-    let mapleader = "\<Space>"
-"-------------------------------------------------------------------------------
-
-"-------------------------------------------------------------------------------
-"   Leader remapping
-"-------------------------------------------------------------------------------
-    nnoremap <leader>v :vsplit<CR> " Vertical split using <space>v
-    nnoremap <leader>h :split<CR> " Horizontal split using <space>h
-    nnoremap <leader>w <C-w>w " Swap to next split window using <space>w
-
-    nnoremap <leader>t :tabnew<CR> " Create new empty tab
-    nnoremap <leader>c :tabclose<CR> " Close the current tab
-    nnoremap <leader>j :tabpre<CR> " Moves to the previous tab
-    nnoremap <leader>k :tabnext<CR> " Moves to the next tab
-
-    nnoremap <leader>n :NERDTreeFocus<CR> " Open NerdTree with <space>n
-"-------------------------------------------------------------------------------
-
-"-------------------------------------------------------------------------------
-"   Set split direction
-"-------------------------------------------------------------------------------
-    set splitbelow
-    set splitright
-"-------------------------------------------------------------------------------
-
-"-------------------------------------------------------------------------------
-"   Silence bells
-"-------------------------------------------------------------------------------
-    set belloff=all
-"-------------------------------------------------------------------------------
