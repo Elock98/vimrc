@@ -18,6 +18,11 @@
         " GoYo Distraction-free Writing
         Plug 'junegunn/goyo.vim'
 
+        " Fuzzy Files
+        Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+        Plug 'junegunn/fzf.vim'
+        Plug 'airblade/vim-rooter'
+
     call plug#end()
 
     let NERDTreeShowHidden=1 " NerdTree will show hidden files
