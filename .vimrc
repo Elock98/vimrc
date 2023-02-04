@@ -75,6 +75,9 @@
     " Open NerdTree with <space>n
     nnoremap <leader>n :NERDTreeFocus<CR>
 
+    " Remap % to <space>m
+    nnoremap <leader>m %
+
     " Use <space>s to get into line substitute fast
     nnoremap <leader>s :s//g<left><left>
 
