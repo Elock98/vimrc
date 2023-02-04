@@ -78,6 +78,9 @@
     " Remap % to <space>m
     nnoremap <leader>m %
 
+    " Remap $ to <space>e
+    nnoremap <leader>e $
+
     " Use <space>s to get into line substitute fast
     nnoremap <leader>s :s//g<left><left>
 
