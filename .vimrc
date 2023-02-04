@@ -105,7 +105,7 @@
 "-------------------------------------------------------------------------------
 
 "-------------------------------------------------------------------------------
-"   Allow for running powershell functions, remove or change shell if not using PS
+"   Allow for running powershell functions, remove if not on windows
 "-------------------------------------------------------------------------------
     set shell=powershell
     set shellcmdflag=-command
