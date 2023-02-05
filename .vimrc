@@ -155,9 +155,13 @@
 "-------------------------------------------------------------------------------
 "   Show line numbers
 "-------------------------------------------------------------------------------
-    set number " Static line numbers
-"    set relativenumber " Relative line numbers
-"    set number relativenumber " Hybrid mode
+    set number
+
+    augroup numbertoggle
+        autocmd!
+        autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+        autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+    augroup END
 "-------------------------------------------------------------------------------
 
 "-------------------------------------------------------------------------------
