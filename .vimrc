@@ -23,9 +23,24 @@
         Plug 'junegunn/fzf.vim'
         Plug 'airblade/vim-rooter'
 
+        " Statusline
+        Plug 'vim-airline/vim-airline'
+        Plug 'vim-airline/vim-airline-themes'
+
+        Plug 'tpope/vim-fugitive'
+
     call plug#end()
 
+    " NerdTree settings
     let NERDTreeShowHidden=1 " NerdTree will show hidden files
+
+    " Airline settings
+    let g:airline_powerline_fonts = 1
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#formatter = 'unique_tail'
+    let g:airline#extensions#branch#enabled = 1
+    set t_Co=256
+    let g:airline_theme='tomorrow'
 "-------------------------------------------------------------------------------
 
 "-------------------------------------------------------------------------------
@@ -234,57 +249,3 @@
 "-------------------------------------------------------------------------------
     set belloff=all
 "-------------------------------------------------------------------------------
-
-"--------------------------------------------------------------------------------------------------------------------
-"   Setup status bar, based on status bar from: https://gist.github.com/meskarune/57b613907ebd1df67eb7bdb83c6e6641
-"--------------------------------------------------------------------------------------------------------------------
-au InsertEnter * hi statusline guifg=black guibg=#d7afff ctermfg=black ctermbg=magenta
-au InsertLeave * hi statusline guifg=black guibg=#8fbfdc ctermfg=black ctermbg=cyan
-hi statusline guifg=black guibg=#8fbfdc ctermfg=black ctermbg=cyan
-
-let g:currentmode={
-        \ 'n'  : 'Normal',
-        \ 'no' : 'Normal·Operator Pending',
-        \ 'v'  : 'Visual',
-        \ 'V'  : 'V·Line',
-        \ '^V' : 'V·Block',
-        \ 's'  : 'Select',
-        \ 'S'  : 'S·Line',
-        \ '^S' : 'S·Block',
-        \ 'i'  : 'Insert',
-        \ 'R'  : 'Replace',
-        \ 'Rv' : 'V·Replace',
-        \ 'c'  : 'Command',
-        \ 'cv' : 'Vim Ex',
-        \ 'ce' : 'Ex',
-        \ 'r'  : 'Prompt',
-        \ 'rm' : 'More',
-        \ 'r?' : 'Confirm',
-        \ '!'  : 'Shell',
-        \ 't'  : 'Terminal'
-\}
-
-set laststatus=2
-set noshowmode
-set statusline=
-set statusline+=%0*\ %n\                                 " Buffer number
-set statusline+=%1*\ %<%F%m%r%h%w\                       " File path, modified, readonly, helpfile, preview
-set statusline+=%3*│                                     " Separator
-set statusline+=%2*\ %Y\                                 " FileType
-set statusline+=%3*│                                     " Separator
-set statusline+=%2*\ %{''.(&fenc!=''?&fenc:&enc).''}     " Encoding
-set statusline+=\ (%{&ff})                               " FileFormat (dos/unix..)
-set statusline+=%=                                       " Right Side
-set statusline+=%3*│                                     " Separator
-set statusline+=%2*\ col:\ %02v\                         " Colomn number
-set statusline+=%3*│                                     " Separator
-set statusline+=%1*\ ln:\ %02l/%L\ (%3p%%)\              " Line number / total lines, percentage of document
-set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
-
-" white behind path and modified flag
-hi User1 ctermfg=000 ctermbg=007 guibg=#4e4e4e guifg=#adadad
-" central red
-hi User2 ctermfg=000 ctermbg=007 guibg=#708090 guifg=#708090
-" red behind splitters
-hi User3 ctermfg=008 ctermbg=007 guibg=#708090 guifg=#708090
-"--------------------------------------------------------------------------------------------------------------------
