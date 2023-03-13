@@ -29,6 +29,8 @@
 
         Plug 'tpope/vim-fugitive'
 
+        Plug 'joshdick/onedark.vim'
+
     call plug#end()
 
     " NerdTree settings
@@ -40,7 +42,8 @@
     let g:airline#extensions#tabline#formatter = 'unique_tail'
     let g:airline#extensions#branch#enabled = 1
     set t_Co=256
-    let g:airline_theme='tomorrow'
+    let g:airline_theme='onedark'
+
 "-------------------------------------------------------------------------------
 
 "-------------------------------------------------------------------------------
@@ -156,7 +159,12 @@
 "-------------------------------------------------------------------------------
 "   Set color scheme
 "-------------------------------------------------------------------------------
-    colorscheme evening
+    colorscheme onedark
+
+    augroup commentColor
+        autocmd!
+        autocmd BufEnter,FocusGained,InsertLeave,WinEnter * :hi Comment ctermfg=81
+    augroup END
 "-------------------------------------------------------------------------------
 
 "-------------------------------------------------------------------------------
