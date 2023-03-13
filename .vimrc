@@ -117,6 +117,29 @@
     " RipGrep
     nnoremap <leader>g :Rg
 
+    " Run recording
+    nnoremap <leader>r @
+
+    " Open file in new tab
+    nnoremap gf <C-w>gf
+
+    " Yank to *
+    nnoremap <leader>y "*y
+
+    " Toggle spellchecking
+     function! ToggleSpellCheck()
+        set spell!
+        if &spell
+            echo "Spellcheck ON"
+        else
+            echo "Spellcheck OFF"
+        endif
+    endfunction
+
+    nnoremap <leader>ö :call ToggleSpellCheck()<CR>
+
+    " Change case of letter and move to the right
+    nnoremap <leader>' ~
 "-------------------------------------------------------------------------------
 
 "-------------------------------------------------------------------------------
