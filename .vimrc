@@ -31,6 +31,10 @@
 
         Plug 'joshdick/onedark.vim'
 
+        Plug 'mhinz/vim-startify'
+
+        Plug 'davidhalter/jedi-vim'
+
     call plug#end()
 
     " NerdTree settings
@@ -43,6 +47,16 @@
     let g:airline#extensions#branch#enabled = 1
     set t_Co=256
     let g:airline_theme='onedark'
+
+    let g:jedi#goto_command = "<leader>gt"
+    let g:jedi#goto_assignments_command = ""
+    let g:jedi#goto_stubs_command = ""
+    let g:jedi#goto_definitions_command = ""
+    let g:jedi#documentation_command = "K"
+    let g:jedi#usages_command = "<leader>u"
+    let g:jedi#completions_command = "<C-Space>"
+    let g:jedi#rename_command = "<leader>rn"
+    let g:jedi#rename_command_keep_name = "<leader>R"
 
 "-------------------------------------------------------------------------------
 
@@ -90,6 +104,15 @@
     " Moves to the next tab
     nnoremap <leader>k :tabnext<CR>
 
+    " Comment line (using '#')
+    xnoremap <leader>l : :norm i# <CR>
+
+    " Remove comment
+    xnoremap <leader>o ::norm xx<CR>
+
+    " Clear highlight
+    nnoremap <C-h> :noh<CR>
+
     " Open NerdTree with <space>n
     nnoremap <leader>n :NERDTreeFocus<CR>
 
@@ -115,7 +138,7 @@
     nnoremap <C-f> :Files<CR>
 
     " RipGrep
-    nnoremap <leader>g :Rg
+    nnoremap <leader>rg :Rg<space>
 
     " Run recording
     nnoremap <leader>r @
@@ -155,10 +178,9 @@
 "-------------------------------------------------------------------------------
 
 "-------------------------------------------------------------------------------
-"   Allow for running powershell functions, remove if not on windows
+"   Enable mouse
 "-------------------------------------------------------------------------------
-    set shell=powershell
-    set shellcmdflag=-command
+    set mouse=a
 "-------------------------------------------------------------------------------
 
 "-------------------------------------------------------------------------------
@@ -188,6 +210,7 @@
         autocmd!
         autocmd BufEnter,FocusGained,InsertLeave,WinEnter * :hi Comment ctermfg=81
     augroup END
+
 "-------------------------------------------------------------------------------
 
 "-------------------------------------------------------------------------------
@@ -279,4 +302,10 @@
 "   Silence bells
 "-------------------------------------------------------------------------------
     set belloff=all
+"-------------------------------------------------------------------------------
+
+"-------------------------------------------------------------------------------
+"   Set clear background
+"-------------------------------------------------------------------------------
+    hi Normal guibg=NONE ctermbg=NONE
 "-------------------------------------------------------------------------------
